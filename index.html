@@ -1,1 +1,145 @@
-Work in progress
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Sorry, May!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            overflow-x: hidden;
+            text-align: center;
+        }
+        .card-container {
+            position: relative;
+            width: 320px;
+            height: 450px;
+            margin: 30px auto;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        .card {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform-style: preserve-3d;
+            transition: transform 0.8s ease-in-out;
+        }
+        .card.open {
+            transform: rotateY(180deg);
+        }
+        .front, .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            backface-visibility: hidden;
+            transition: 0.5s;
+            padding: 20px;
+            text-align: center;
+        }
+        .front {
+            background: #ffccd5;
+            font-size: 28px;
+            font-weight: bold;
+            color: #d63384;
+            font-family: 'Great Vibes', cursive;
+        }
+        .back {
+            transform: rotateY(180deg);
+            background: white;
+            border: 2px solid #ffb3c1;
+            font-size: 20px;
+            color: #333;
+            position: relative;
+        }
+        .container {
+            padding: 50px 20px;
+        }
+        .sorry-section {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .sorry-section.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .sorry-text {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #d63384;
+            white-space: pre-wrap;
+            overflow: hidden;
+            border-right: 2px solid #d63384;
+            width: 100%;
+            display: inline-block;
+            animation: typing 6s steps(100) forwards, blink 1s infinite;
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+    </style>
+</head>
+<body>
+    <h2 class="text-white text-center shadow-lg">May, For you!</h2>
+    <div class="card-container" id="cardContainer">
+        <div class="card" id="card">
+            <div class="front"><i class="fas fa-heart"></i> Click Me</div>
+            <div class="back">
+                <i class="fas fa-star"></i>
+                <h2>Dear May,</h2>
+                <p>I deeply regret not trusting you. You mean a lot to me. I hope you forgive me! 💕</p>
+                <p>- Your Friend!</p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="sorry-section" id="sorrySection">
+            <div class="sorry-text" id="sorryText"></div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let sorryMessages = "";
+            for (let i = 1; i <= 100; i++) {
+                sorryMessages += `I'm sorry for not trusting you when I should have.\n`;
+            }
+            document.getElementById("sorryText").innerText = sorryMessages;
+
+            function handleScroll() {
+                const section = document.getElementById("sorrySection");
+                const position = section.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                if (position < screenPosition) {
+                    section.classList.add("show");
+                }
+            }
+
+            window.addEventListener("scroll", handleScroll);
+        });
+    </script>
+</body>
+</html>
